@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uber_eats_flutter/json/home_page_json.dart';
 import 'package:uber_eats_flutter/theme/colors.dart';
@@ -63,6 +64,158 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               getCategories(size),
+              SizedBox(height: 15),
+              Container(
+                  width: size.width,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 15, right: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: size.width,
+                              height: 160,
+                              child: Image(
+                                  image: NetworkImage(firstMenu[0]['img']),
+                                  fit: BoxFit.cover),
+                            ),
+                            Positioned(
+                                bottom: 15,
+                                right: 15,
+                                child: SvgPicture.asset(
+                                    firstMenu[0]['is_liked']
+                                        ? "assets/images/loved_icon.svg"
+                                        : "assets/images/love_icon.svg",
+                                    width: 20,
+                                    color: Colors.white)),
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Text(firstMenu[0]['name'],
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w400)),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Text("Sponsored",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(Icons.info, size: 15, color: Colors.grey),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Text(firstMenu[0]['description'],
+                            style: TextStyle(fontSize: 14)),
+                        SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                    color: textFieldColor,
+                                    borderRadius: BorderRadius.circular(3)),
+                                child: Padding(
+                                  padding: EdgeInsets.all(3),
+                                  child: Icon(
+                                    Icons.hourglass_bottom,
+                                    size: 16,
+                                  ),
+                                )),
+                            SizedBox(width: 8),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: textFieldColor,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: Text(firstMenu[0]['time'],
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ))),
+                            ),
+                            SizedBox(width: 8),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: textFieldColor,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: Text(firstMenu[0]['delivery_fee'],
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ))),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
+              SizedBox(height: 15),
+              Container(
+                width: size.width,
+                height: 10,
+                decoration: BoxDecoration(
+                  color: textFieldColor,
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15, bottom: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "More to explore",
+                      style: customTitle,
+                    ),
+                    SizedBox(height: 15),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children: List.generate(exploreMenu.length, (index) {
+                        return getItemsMenu(size, exploreMenu, index);
+                      })),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                width: size.width,
+                height: 10,
+                decoration: BoxDecoration(
+                  color: textFieldColor,
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15, bottom: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Popular Near You",
+                      style: customTitle,
+                    ),
+                    SizedBox(height: 15),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children:
+                              List.generate(popluarNearYou.length, (index) {
+                        return getItemsMenu(size, popluarNearYou, index);
+                      })),
+                    ),
+                  ],
+                ),
+              )
             ],
           )
         ],
@@ -181,6 +334,108 @@ Widget getCategories(var size) {
               ),
             ),
           )),
+    ),
+  );
+}
+
+Widget getItemsMenu(var size, var json, var index) {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          children: [
+            Container(
+              width: size.width,
+              height: 160,
+              child: Image(
+                  image: NetworkImage(json[index]['img']), fit: BoxFit.cover),
+            ),
+            Positioned(
+                bottom: 15,
+                right: 15,
+                child: SvgPicture.asset(
+                    json[index]['is_liked']
+                        ? "assets/images/loved_icon.svg"
+                        : "assets/images/love_icon.svg",
+                    width: 20,
+                    color: Colors.white)),
+          ],
+        ),
+        SizedBox(height: 15),
+        Text(json[index]['name'],
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+        SizedBox(height: 8),
+        Row(
+          children: [
+            Text("Sponsored",
+                style: TextStyle(
+                  fontSize: 14,
+                )),
+            SizedBox(
+              width: 5,
+            ),
+            Icon(Icons.info, size: 15, color: Colors.grey),
+          ],
+        ),
+        SizedBox(height: 8),
+        Text(json[index]['description'], style: TextStyle(fontSize: 14)),
+        SizedBox(height: 8),
+        Row(
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                    color: textFieldColor,
+                    borderRadius: BorderRadius.circular(3)),
+                child: Padding(
+                  padding: EdgeInsets.all(3),
+                  child: Icon(
+                    Icons.hourglass_bottom,
+                    size: 16,
+                  ),
+                )),
+            SizedBox(width: 8),
+            Container(
+              decoration: BoxDecoration(
+                color: textFieldColor,
+                borderRadius: BorderRadius.circular(3),
+              ),
+              child: Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text(json[index]['time'],
+                      style: TextStyle(
+                        fontSize: 14,
+                      ))),
+            ),
+            SizedBox(width: 8),
+            Container(
+              decoration: BoxDecoration(
+                color: textFieldColor,
+                borderRadius: BorderRadius.circular(3),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: Row(
+                  children: [
+                    Text(json[index]['rate'],
+                        style: TextStyle(
+                          fontSize: 14,
+                        )),
+                    SizedBox(width: 3),
+                    Icon(Icons.star, color: yellowStar, size: 17),
+                    SizedBox(width: 3),
+                    Text(json[index]['rate_number'],
+                        style: TextStyle(
+                          fontSize: 14,
+                        )),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     ),
   );
 }
