@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uber_eats_flutter/json/home_page_json.dart';
+import 'package:uber_eats_flutter/pages/store_detail_page.dart';
 import 'package:uber_eats_flutter/theme/colors.dart';
 import 'package:uber_eats_flutter/theme/styles.dart';
 import 'package:uber_eats_flutter/widgets/custom_slider.dart';
@@ -67,94 +68,104 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 15),
               Container(
                   width: size.width,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          children: [
-                            Container(
-                              width: size.width,
-                              height: 160,
-                              child: Image(
-                                  image: NetworkImage(firstMenu[0]['img']),
-                                  fit: BoxFit.cover),
-                            ),
-                            Positioned(
-                                bottom: 15,
-                                right: 15,
-                                child: SvgPicture.asset(
-                                    firstMenu[0]['is_liked']
-                                        ? "assets/images/loved_icon.svg"
-                                        : "assets/images/love_icon.svg",
-                                    width: 20,
-                                    color: Colors.white)),
-                          ],
-                        ),
-                        SizedBox(height: 15),
-                        Text(firstMenu[0]['name'],
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w400)),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Text("Sponsored",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                )),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(Icons.info, size: 15, color: Colors.grey),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Text(firstMenu[0]['description'],
-                            style: TextStyle(fontSize: 14)),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Container(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                StoreDetailPage(firstMenu[0]['img']),
+                          ));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 15, right: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                width: size.width,
+                                height: 160,
+                                child: Image(
+                                    image: NetworkImage(firstMenu[0]['img']),
+                                    fit: BoxFit.cover),
+                              ),
+                              Positioned(
+                                  bottom: 15,
+                                  right: 15,
+                                  child: SvgPicture.asset(
+                                      firstMenu[0]['is_liked']
+                                          ? "assets/images/loved_icon.svg"
+                                          : "assets/images/love_icon.svg",
+                                      width: 20,
+                                      color: Colors.white)),
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Text(firstMenu[0]['name'],
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w400)),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Text("Sponsored",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  )),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon(Icons.info, size: 15, color: Colors.grey),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Text(firstMenu[0]['description'],
+                              style: TextStyle(fontSize: 14)),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      color: textFieldColor,
+                                      borderRadius: BorderRadius.circular(3)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(3),
+                                    child: Icon(
+                                      Icons.hourglass_bottom,
+                                      size: 16,
+                                    ),
+                                  )),
+                              SizedBox(width: 8),
+                              Container(
                                 decoration: BoxDecoration(
-                                    color: textFieldColor,
-                                    borderRadius: BorderRadius.circular(3)),
+                                  color: textFieldColor,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(3),
-                                  child: Icon(
-                                    Icons.hourglass_bottom,
-                                    size: 16,
-                                  ),
-                                )),
-                            SizedBox(width: 8),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: textFieldColor,
-                                borderRadius: BorderRadius.circular(3),
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(firstMenu[0]['time'],
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                        ))),
                               ),
-                              child: Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text(firstMenu[0]['time'],
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                      ))),
-                            ),
-                            SizedBox(width: 8),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: textFieldColor,
-                                borderRadius: BorderRadius.circular(3),
+                              SizedBox(width: 8),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: textFieldColor,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: Text(firstMenu[0]['delivery_fee'],
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                        ))),
                               ),
-                              child: Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Text(firstMenu[0]['delivery_fee'],
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                      ))),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   )),
               SizedBox(height: 15),
@@ -180,7 +191,16 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                           children: List.generate(exploreMenu.length, (index) {
-                        return getItemsMenu(size, exploreMenu, index);
+                        return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StoreDetailPage(
+                                        exploreMenu[index]['img']),
+                                  ));
+                            },
+                            child: getItemsMenu(size, exploreMenu, index));
                       })),
                     ),
                   ],
@@ -210,7 +230,16 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                           children:
                               List.generate(popluarNearYou.length, (index) {
-                        return getItemsMenu(size, popluarNearYou, index);
+                        return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StoreDetailPage(
+                                        popluarNearYou[index]['img']),
+                                  ));
+                            },
+                            child: getItemsMenu(size, popluarNearYou, index));
                       })),
                     ),
                   ],
