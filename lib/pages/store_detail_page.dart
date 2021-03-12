@@ -98,6 +98,88 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
                 ),
               ],
             ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Starbucks (Park Row at Beekman St)",
+                      style:
+                          TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Container(
+                        width: size.width - 30,
+                        child: Text(
+                            "Cafe - Coffe & Tea = Breakfast and Brunch - Bakery \$",
+                            style: TextStyle(fontSize: 14, height: 1.3)),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                              color: textFieldColor,
+                              borderRadius: BorderRadius.circular(3)),
+                          child: Padding(
+                            padding: EdgeInsets.all(3),
+                            child: Icon(
+                              Icons.hourglass_bottom,
+                              size: 16,
+                            ),
+                          )),
+                      SizedBox(width: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: textFieldColor,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: Padding(
+                            padding: EdgeInsets.all(5),
+                            child: Text("40 - 50 Min",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ))),
+                      ),
+                      SizedBox(width: 8),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: textFieldColor,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Row(
+                            children: [
+                              Text("4.7",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  )),
+                              SizedBox(width: 3),
+                              Icon(Icons.star, color: yellowStar, size: 17),
+                              SizedBox(width: 3),
+                              Text("16",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Divider(color: black.withOpacity(0.3)),
+                  SizedBox(height: 10),
+                ],
+              ),
+            ),
           ],
         ),
       ),
