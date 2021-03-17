@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:uber_eats_flutter/json/home_page_json.dart';
 import 'package:uber_eats_flutter/theme/colors.dart';
+import 'package:uber_eats_flutter/theme/styles.dart';
 
 class StoreDetailPage extends StatefulWidget {
   final String img;
@@ -177,6 +181,80 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
                   SizedBox(height: 15),
                   Divider(color: black.withOpacity(0.3)),
                   SizedBox(height: 10),
+                  Text(
+                    "Store Info",
+                    style: customContent,
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Container(
+                        width: size.width * 0.8,
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/images/pin_icon.svg",
+                              width: 15,
+                              color: black.withOpacity(0.5),
+                            ),
+                            SizedBox(width: 8),
+                            Text("38 Park Row Frnt 4, New York, NY 1003",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                )),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Text("More Info",
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: primary,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Icon(LineIcons.comment, size: 15, color: primary),
+                      SizedBox(width: 8),
+                      Text("People say...",
+                          style: TextStyle(
+                              fontSize: 14, color: black.withOpacity(0.5))),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                        children: List.generate(
+                      peopleFeedback.length,
+                      (index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 15.0),
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: primary.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(30)),
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 15, right: 15),
+                                child: Text(peopleFeedback[index],
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: primary,
+                                      fontWeight: FontWeight.w500,
+                                    )),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    )),
+                  )
                 ],
               ),
             ),
