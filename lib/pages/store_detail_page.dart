@@ -49,7 +49,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.only(bottom: 60),
+        padding: EdgeInsets.only(bottom: 100),
         child: Column(
           children: [
             Stack(
@@ -308,6 +308,32 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
                   ),
                   SizedBox(height: 15),
                   Divider(color: black.withOpacity(0.3)),
+                  SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Menu",
+                              style: TextStyle(
+                                fontSize: 14,
+                              )),
+                          Icon(LineIcons.search, size: 25),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Text("Packed For You",
+                          style: TextStyle(
+                              fontSize: 21, fontWeight: FontWeight.bold)),
+                      SizedBox(height: 30),
+                      Column(
+                        children: List.generate(packForYou.length, (index) {
+                          return packedForYou(index);
+                        }),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -316,4 +342,47 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
       ),
     );
   }
+}
+
+Widget packedForYou(index) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        Container(
+          width: (size.width - 30) * 0.6,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                packForYou[index]['name'],
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(packForYou[index]['description'],
+                  style: TextStyle(height: 1.3)),
+              SizedBox(height: 10),
+              Text(packForYou[index]['price'], style: TextStyle(height: 1.3)),
+            ],
+          ),
+        ),
+        SizedBox(width: 15),
+        Expanded(
+          child: Container(
+            height: 110,
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+              child: Image(
+                  image: NetworkImage(packForYou[index]['img']),
+                  fit: BoxFit.cover),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
