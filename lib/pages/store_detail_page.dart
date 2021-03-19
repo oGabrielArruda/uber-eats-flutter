@@ -329,7 +329,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
                       SizedBox(height: 30),
                       Column(
                         children: List.generate(packForYou.length, (index) {
-                          return packedForYou(index);
+                          return packedForYou(index, size);
                         }),
                       )
                     ],
@@ -344,7 +344,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
   }
 }
 
-Widget packedForYou(index) {
+Widget packedForYou(index, size) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
